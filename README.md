@@ -78,3 +78,24 @@ Contributed to the development of the Vehicle Management module, including vehic
 
 This project was collaboratively developed by a team of students as part of the Object-Oriented Programming module at SLIIT.
 
+
+
+## Application Screenshots
+
+### 1. Home Page
+![RENTX Home Page](Screenshots/home-page.png)
+
+### 2. Vehicle Fleet
+![Vehicle Fleet](Screenshots/vehicles.png)
+
+### 3. Login Page
+![Login Page](Screenshots/users_login.png)
+
+### 4. Admin Dashboard
+![Admin Dashboard](Screenshots/admin%20-%20dashboard.png)
+
+### 5. Add Vehicle
+![Add Vehicle](Screenshots/vehicles_add.png)
+
+### 6. All Bookings
+![All Bookings](Screenshots/all-bookings.png)
