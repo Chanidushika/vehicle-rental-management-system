@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: layout(~{::div.content})">
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+<div class="content flex justify-center py-12 bg-rofi-white min-h-[80vh]">
+    <div class="w-full max-w-2xl px-4">
+        
+        <!-- Clean White Card -->
+        <div class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            
+            <div class="p-8 text-center border-b border-gray-100">
+                <h2 class="text-3xl font-black text-rofi-black tracking-tight">Checkout</h2>
+                <p class="text-gray-500 font-bold text-sm mt-1">Review your vehicle and select dates.</p>
+            </div>
+
+            <div th:if="${error}" class="m-8 mb-0 p-4 rounded-xl bg-red-50 text-red-700 font-bold text-center border border-red-200">
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="p-8 border-b border-gray-100 flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-24 h-24 bg-gray-100 rounded-2xl flex items-center justify-center text-4xl shrink-0 border border-gray-200">
+                    <span th:if="${vehicle.type == 'CAR'}">🚗</span>
+                    <span th:if="${vehicle.type == 'BIKE'}">🏍️</span>
+                    <span th:if="${vehicle.type == 'VAN'}">🚚</span>
+                    <span th:if="${vehicle.type == 'TRUCK'}">🚛</span>
+                </div>
+                <div class="flex-1 text-center md:text-left">
+                    <span class="px-2.5 py-1 bg-yellow-100 text-yellow-800 text-[10px] font-black uppercase tracking-widest rounded-full mb-2 inline-block" th:text="${vehicle.type}">TYPE</span>
+                    <h3 class="text-2xl font-black text-rofi-black" th:text="${vehicle.brand + ' ' + vehicle.model}">Vehicle Name</h3>
+                    <div class="mt-2 text-xl font-bold text-gray-500">
+                        LKR <span th:text="${vehicle.pricePerDay}"></span> <span class="text-sm">/ day</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form th:action="@{/bookings/new}" method="post" class="p-8 bg-gray-50">
+                <input type="hidden" name="vehicleId" th:value="${vehicle.id}">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Pick-up Date</label>
+                        <input type="date" name="startDate" id="startDate" required 
+                               class="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-rofi-black font-bold focus:outline-none focus:border-rofi-yellow focus:ring-2 focus:ring-rofi-yellow transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Return Date</label>
+                        <input type="date" name="endDate" id="endDate" required 
+                               class="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl text-rofi-black font-bold focus:outline-none focus:border-rofi-yellow focus:ring-2 focus:ring-rofi-yellow transition-all">
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/vehicles" class="px-6 py-4 bg-white border border-gray-300 text-gray-700 font-black text-center rounded-full hover:bg-gray-100 transition-colors">Cancel</a>
+                    <button type="submit" class="flex-1 py-4 bg-gradient-to-r from-[#FFC107] to-[#FF9800] hover:from-[#FFB300] hover:to-[#F57C00] text-white text-lg font-black rounded-full transition-all shadow-md transform hover:-translate-y-0.5 text-center">
+                        Confirm & Book Now
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementById("startDate").setAttribute('min', today);
+        document.getElementById("endDate").setAttribute('min', today);
+        document.getElementById("startDate").addEventListener("change", function() {
+            document.getElementById("endDate").setAttribute('min', this.value);
+        });
+    </script>
+</div>
+</body>
+</html>

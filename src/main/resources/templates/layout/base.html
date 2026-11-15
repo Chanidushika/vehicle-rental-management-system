@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Rental Platform</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        rofi: {
+                            black: '#000000',
+                            yellow: '#FFC107',
+                            white: '#F9F9F9',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="bg-rofi-white text-rofi-black font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Top Navbar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="/" class="text-3xl font-black text-rofi-black tracking-tighter flex items-center">
+                        <span class="w-10 h-10 bg-rofi-yellow rounded-lg flex items-center justify-center mr-2 text-white shadow-md">R</span>
+                        RENTX
+                    </a>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 font-bold text-sm">
+                    <a href="/" class="text-gray-900 hover:text-rofi-yellow transition-colors">Home</a>
+                    <a href="/vehicles" class="text-gray-900 hover:text-rofi-yellow transition-colors">Vehicles</a>
+                    <a th:if="${session.loggedInUser != null && session.loggedInUser.role.name() == 'ADMIN'}" href="/admin/dashboard" class="text-gray-900 hover:text-rofi-yellow transition-colors">Dashboard</a>
+                    <a th:if="${session.loggedInUser != null && session.loggedInUser.role.name() == 'CUSTOMER'}" href="/bookings/history" class="text-gray-900 hover:text-rofi-yellow transition-colors">My Bookings</a>
+                </nav>
+
+                <!-- Right Side (LKR + Auth) -->
+                <div class="flex items-center space-x-4">
+                    <!-- LKR Currency Selector -->
+                    <div class="hidden sm:flex items-center text-sm font-bold border border-gray-300 rounded-full px-3 py-1 cursor-pointer hover:bg-gray-50">
+                        <span class="text-lg leading-none mr-2">🇱🇰</span>
+                        LKR
+                    </div>
+                    
+                    <th:block th:if="${session.loggedInUser == null}">
+                        <a href="/users/login" class="text-sm font-bold text-rofi-black hover:text-rofi-yellow transition-colors hidden sm:block">Log In</a>
+                        <a href="/users/register" class="text-sm font-bold text-white bg-gradient-to-r from-[#FFC107] to-[#FF9800] px-6 py-2.5 rounded-full hover:shadow-lg hover:scale-105 transition-all shadow-md">Sign Up</a>
+                    </th:block>
+                    
+                    <th:block th:if="${session.loggedInUser != null}">
+                        <a href="/users/profile" class="w-10 h-10 rounded-full bg-rofi-yellow flex items-center justify-center text-white font-bold text-lg hover:shadow-md transition-shadow">
+                            <span th:text="${#strings.substring(session.loggedInUser.name,0,1).toUpperCase()}">U</span>
+                        </a>
+                        <a href="/users/logout" class="text-sm font-bold text-red-500 hover:text-red-700 transition-colors hidden sm:block ml-2">Logout</a>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 w-full">
+        <div th:replace="${content}"></div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <span class="text-2xl font-black text-rofi-black tracking-tighter flex items-center">
+                    <span class="w-8 h-8 bg-rofi-yellow rounded flex items-center justify-center mr-2 text-white">R</span>
+                    RENTX
+                </span>
+            </div>
+            <p class="text-gray-500 text-sm font-medium">&copy; 2026 Vehicle Rental Platform. Prices in LKR.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

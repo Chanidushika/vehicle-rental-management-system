@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: layout(~{::div.content})">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<div class="content">
+    
+    <!-- Hero Section -->
+    <div class="relative w-full min-h-[600px] flex items-center justify-center pt-10 pb-20 px-4">
+        <!-- Dark Forest Background Image (Using the previously saved banner.jpg) -->
+        <div class="absolute inset-0 z-0 bg-gray-900">
+            <img src="/images/banner.jpg" alt="Dark Forest Road" class="w-full h-full object-cover opacity-70">
+        </div>
+
+        <!-- Centered Search Box Card -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl relative z-10 overflow-hidden">
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200">
+                <div class="flex-1 text-center py-4 font-extrabold text-rofi-black border-b-4 border-rofi-yellow bg-white cursor-pointer">
+                    Vehicle Only
+                </div>
+                <div class="flex-1 text-center py-4 font-bold text-gray-400 bg-gray-50 border-b-4 border-transparent cursor-pointer hover:bg-gray-100 transition-colors" title="Coming Soon">
+                    With Driver
+                </div>
+            </div>
+            
+            <!-- Search Form -->
+            <form th:action="@{/vehicles/search}" method="get" class="p-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                    
+                    <!-- Vehicle Type -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Vehicle Type</label>
+                        <select name="type" class="w-full border-b-2 border-gray-300 py-2 text-rofi-black font-bold focus:outline-none focus:border-rofi-yellow bg-transparent">
+                            <option value="">Any Type</option>
+                            <option value="CAR">Car</option>
+                            <option value="BIKE">Bike</option>
+                            <option value="VAN">Van</option>
+                            <option value="TRUCK">Truck</option>
+                        </select>
+                    </div>
+
+                    <!-- Location -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Location</label>
+                        <input type="text" name="location" placeholder="City, Airport, etc." 
+                               class="w-full border-b-2 border-gray-300 py-2 text-rofi-black font-bold placeholder-gray-400 focus:outline-none focus:border-rofi-yellow bg-transparent">
+                    </div>
+
+                    <!-- Date/Time (Dummy inputs for UI match, we'll just redirect to search) -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Pick-up Date</label>
+                        <input type="date" class="w-full border-b-2 border-gray-300 py-2 text-rofi-black font-bold focus:outline-none focus:border-rofi-yellow bg-transparent">
+                    </div>
+                    
+                    <!-- Search Button -->
+                    <div>
+                        <button type="submit" class="w-full py-3.5 bg-rofi-yellow hover:bg-yellow-500 text-white font-extrabold text-lg rounded-xl transition-all shadow-md">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Trust Section (Safe, Flexible & Supported) -->
+    <div class="max-w-7xl mx-auto px-4 py-20">
+        <h2 class="text-3xl font-black text-center text-rofi-black mb-16">Safe, Flexible & Supported</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            
+            <div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-yellow-50 flex items-center justify-center mb-6 border-4 border-rofi-yellow shadow-sm">
+                    <span class="text-4xl">🛡️</span>
+                </div>
+                <h3 class="text-xl font-bold text-rofi-black mb-3">Safe & Secure</h3>
+                <p class="text-gray-500 font-medium">All vehicles are thoroughly verified and insured for your peace of mind.</p>
+            </div>
+            
+            <div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-yellow-50 flex items-center justify-center mb-6 border-4 border-rofi-yellow shadow-sm">
+                    <span class="text-4xl">🔄</span>
+                </div>
+                <h3 class="text-xl font-bold text-rofi-black mb-3">Flexible Bookings</h3>
+                <p class="text-gray-500 font-medium">Change of plans? Easily modify or extend your rental dates.</p>
+            </div>
+            
+            <div>
+                <div class="w-24 h-24 mx-auto rounded-full bg-yellow-50 flex items-center justify-center mb-6 border-4 border-rofi-yellow shadow-sm">
+                    <span class="text-4xl">🎧</span>
+                </div>
+                <h3 class="text-xl font-bold text-rofi-black mb-3">24/7 Support</h3>
+                <p class="text-gray-500 font-medium">Our dedicated customer service team is always here to help you.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- RENTX Ecosystem Section -->
+    <div class="bg-rofi-white border-y border-gray-200 py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-black text-center text-rofi-black mb-4">The RENTX Ecosystem</h2>
+            <p class="text-center text-gray-500 font-medium mb-12">Join our community and experience seamless vehicle rentals.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Users Card -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-6">🚗</div>
+                    <h3 class="text-2xl font-bold text-rofi-black mb-4">For Users</h3>
+                    <p class="text-gray-500 font-medium mb-8">Access thousands of vehicles near you at the best competitive rates in LKR.</p>
+                    <a href="/users/register" class="px-8 py-3 bg-gradient-to-r from-[#FFC107] to-[#FF9800] text-white font-bold rounded-full shadow-md hover:scale-105 transition-transform mt-auto">
+                        Register Now
+                    </a>
+                </div>
+                
+                <!-- Hosts Card -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
+                    <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center text-4xl mb-6">🔑</div>
+                    <h3 class="text-2xl font-bold text-rofi-black mb-4">For Hosts</h3>
+                    <p class="text-gray-500 font-medium mb-8">Turn your idle vehicle into extra income. Safe, insured, and highly profitable.</p>
+                    <a href="/vehicles/add" class="px-8 py-3 bg-gradient-to-r from-[#FFC107] to-[#FF9800] text-white font-bold rounded-full shadow-md hover:scale-105 transition-transform mt-auto">
+                        Become a Host
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
