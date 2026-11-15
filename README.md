@@ -34,7 +34,6 @@ No SQL Server installation or database configuration is required.
 
 
 ### 2. Running in IDEs
-HRI
 
 #### IntelliJ IDEA
 1. Open IntelliJ IDEA.
