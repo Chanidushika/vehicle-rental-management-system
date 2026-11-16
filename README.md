@@ -32,6 +32,8 @@ Vehicle, user, booking, and payment records are stored in text files within the 
 
 No SQL Server installation or database configuration is required.
 
+The application automatically creates the `data/` directory and the required text files when they are first accessed. No manual database setup is required.
+
 
 ### 2. Running in IDEs
 
